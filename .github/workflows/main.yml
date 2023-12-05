@@ -31,8 +31,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.13.0
-          cache: npm
-          cache-dependency-path: client/package-lock.json
+
+      - name: Get full Node.js version
+        id: full-node-version
+        run: echo version=$(node --version) >> $GITHUB_OUTPUT
+  
+      - name: Setup Node.js cache
+        uses: actions/cache@v3
+        with:
+          path: client/node_modules
+          key: node_modules-${{ matrix.os }}-${{ steps.full-node-version.outputs.version }}-${{ hashFiles('client/**/package-lock.json') }}
 
       - name: Compile client
         run: make
@@ -62,7 +70,6 @@ jobs:
 
       - name: Setup cache
         uses: actions/cache@v3
-        id: cache
         with:
           path: .venv
           key: venv-${{ matrix.os }}-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
