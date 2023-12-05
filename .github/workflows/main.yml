@@ -11,22 +11,25 @@ jobs:
         include:
           - os: linux
             runner: ubuntu-latest
-            python_cmd: python3.11
             zip_name: linux
-            activate_cmd: source .venv/bin/activate
           - os: windows
             runner: windows-latest
-            python_cmd: python
             zip_name: windows
-            activate_cmd: .venv\Scripts\Activate.ps1
           - os: macos
             runner: macOS-latest
-            python_cmd: python3.11
             zip_name: macos
-            activate_cmd: source .venv/bin/activate
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.1
+        with:
+          python-version: 3.11
+
+      - name: Get full Python version
+        id: full-python-version
+        run: echo version=$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))") >> $GITHUB_OUTPUT
 
       - name: Install poetry
         run: curl -sSL https://install.python-poetry.org | python - -y
@@ -42,11 +45,12 @@ jobs:
       - name: Configure poetry
         run: poetry config virtualenvs.in-project true
 
-      - name: Setup Python
-        uses: actions/setup-python@v4.7.1
+      - name: Setup cache
+        uses: actions/cache@v3
+        id: cache
         with:
-          python-version: 3.11
-          cache: poetry
+          path: .venv
+          key: venv-${{ matrix.os }}-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
         run: poetry install --with actions
