@@ -4,39 +4,48 @@ on: [push]
 jobs:
   package:
     name: Packaging on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [linux, windows, macos]
         include:
-          - os: ubuntu-latest
+          - os: linux
+            runner: ubuntu-latest
             python_cmd: python3.11
             zip_name: linux
             activate_cmd: source .venv/bin/activate
-          - os: windows-latest
+          - os: windows
+            runner: windows-latest
             python_cmd: python
             zip_name: windows
             activate_cmd: .venv\Scripts\Activate.ps1
-          - os: macOS-latest
+          - os: macos
+            runner: macOS-latest
             python_cmd: python3.11
             zip_name: macos
             activate_cmd: source .venv/bin/activate
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Install Poetry
-        run: pipx install poetry==1.7.1
+
+      - name: Install poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python - -y
+
+      - name: Config poetry
+        run: |
+          poetry config virtualenvs.in-project true
+
       - name: Setup Python
         uses: actions/setup-python@v4.7.1
         with:
           python-version: 3.11
           cache: poetry
-      - name: Run PyInstaller in venv
+
+      - name: Run PyInstaller
         run: |
-          ${{ matrix.python_cmd }} -m venv .venv
-          ${{ matrix.activate_cmd }}
-          poetry install --with dev
-          pyinstaller -n test-actions test_actions/__main__.py
+          poetry run pyinstaller -n test-actions test_actions/__main__.py
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3.1.3
         with:
