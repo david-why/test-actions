@@ -14,14 +14,12 @@ jobs:
         with:
           python-version: 3.11.6
           cache: poetry
-      - name: Use Virtual Environment
+      - name: Run PyInstaller in venv
         run: |
           python3.11 -m venv .venv
           source .venv/bin/activate
-      - name: Install project
-        run: poetry install
-      - name: Run PyInstaller
-        run: pyinstaller -n test-actions
+          poetry install
+          pyinstaller -n test-actions test_actions/__main__.py
       - name: Zip dist files
         run: zip -r dist/linux.zip dist/test-actions
       - name: Upload artifact
