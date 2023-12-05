@@ -3,3 +3,4 @@
 /dist
 /*.spec
 /test_actions/static
+__pycache__

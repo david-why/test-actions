@@ -1,12 +1,9 @@
-import atexit
 import os
-import pkg_resources
+from importlib.resources import files
 
 print(os.getcwd())
 print(os.listdir())
 
-path = pkg_resources.resource_filename(__package__, 'static')
+path = files(__package__)
 
-print(os.listdir(path))
-
-atexit.register(pkg_resources.cleanup_resources)
+print([p.name for p in path.iterdir()])
