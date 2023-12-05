@@ -1,9 +1,13 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Package with PyInstaller
+run-name: ${{ github.actor }} is compiling ${{ github.ref_name }}
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
+  package:
+    name: Packaging on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -12,7 +16,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4.7.1
         with:
-          python-version: 3.11.6
+          python-version: 3.11
           cache: poetry
       - name: Run PyInstaller in venv
         run: |
@@ -21,10 +25,11 @@ jobs:
           poetry install --with dev
           pyinstaller -n test-actions test_actions/__main__.py
       - name: Zip dist files
-        run: zip -r dist/linux.zip dist/test-actions
+        run: |
+          cd dist
+          zip -r linux.zip test-actions
       - name: Upload artifact
         uses: actions/upload-artifact@v3.1.3
         with:
           name: linux.zip
           path: dist/linux.zip
-      - run: echo "This job's status is ${{ job.status }}."
