@@ -71,7 +71,7 @@ jobs:
         run: poetry install --with actions
 
       - name: Run PyInstaller
-        run: poetry run pyinstaller -n test-actions --collect-app test_actions test_actions/__main__.py
+        run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/__main__.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
