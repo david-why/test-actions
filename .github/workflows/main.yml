@@ -9,13 +9,17 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Poetry
         run: pipx install poetry==1.7.1
-      - name: Create Virtual Environment
-        run: poetry config --local virtualenvs.in-project true
-      - name: Setup Python and Poetry
-        uses: ITProKyle/action-setup-python@v0.4.0
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.1
         with:
           python-version: 3.11.6
-          poetry-version: 1.7.1
+          cache: poetry
+      - name: Use Virtual Environment
+        run: |
+          python3.11 -m venv .venv
+          sourve .venv/bin/activate
+      - name: Install project
+        run: poetry install
       - name: Run PyInstaller
         run: pyinstaller -n test-actions
       - name: Zip dist files
