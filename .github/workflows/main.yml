@@ -7,15 +7,15 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Install poetry
-        run: pipx install poetry
-      - name: Setup Python
-        uses: actions/setup-python@v4.7.1
+      - name: Install Poetry
+        run: pipx install poetry==1.7.1
+      - name: Create Virtual Environment
+        run: poetry config --local virtualenvs.in-project true
+      - name: Setup Python and Poetry
+        uses: ITProKyle/action-setup-python@v0.4.0
         with:
           python-version: 3.11.6
-          cache: poetry
-      - name: Install project
-        run: poetry install --with dev
+          poetry-version: 1.7.1
       - name: Run PyInstaller
         run: pyinstaller -n test-actions
       - name: Zip dist files
