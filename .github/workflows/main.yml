@@ -29,12 +29,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python - -y
+        run: curl -sSL https://install.python-poetry.org | python - -y
 
-      - name: Config poetry
-        run: |
-          poetry config virtualenvs.in-project true
+      - name: Update PATH
+        if: ${{ matrix.os != 'windows' }}
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Update PATH for Windows
+        if: ${{ matrix.os == 'windows' }}
+        run: echo "$APPDATA\Python\Scripts" >> $GITHUB_PATH
+
+      - name: Configure poetry
+        run: poetry config virtualenvs.in-project true
 
       - name: Setup Python
         uses: actions/setup-python@v4.7.1
@@ -43,12 +49,10 @@ jobs:
           cache: poetry
 
       - name: Install dependencies
-        run: |
-          poetry install --with actions
+        run:  install --with actions
 
       - name: Run PyInstaller
-        run: |
-          poetry run pyinstaller -n test-actions test_actions/__main__.py
+        run: poetry run pyinstaller -n test-actions test_actions/__main__.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3.1.3
