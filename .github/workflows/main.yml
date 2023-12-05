@@ -24,9 +24,20 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.13.0
+          cache: npm
+
+      - name: Compile client
+        run: make
 
       - name: Setup Python
-        uses: actions/setup-python@v4.7.1
+        uses: actions/setup-python@v4
         with:
           python-version: 3.11
 
@@ -62,7 +73,7 @@ jobs:
         run: poetry run pyinstaller -n test-actions test_actions/__main__.py
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3.1.3
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.zip_name }}
           path: dist
