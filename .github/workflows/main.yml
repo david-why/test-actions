@@ -37,12 +37,8 @@ jobs:
           ${{ matrix.activate_cmd }}
           poetry install --with dev
           pyinstaller -n test-actions test_actions/__main__.py
-      - name: Zip dist files
-        run: |
-          cd dist
-          zip -r ${{ matrix.zip_name }} test-actions
       - name: Upload artifact
         uses: actions/upload-artifact@v3.1.3
         with:
           name: ${{ matrix.zip_name }}
-          path: dist/${{ matrix.zip_name }}
+          path: dist/test_actions
