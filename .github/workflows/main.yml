@@ -18,7 +18,7 @@ jobs:
         run: |
           python3.11 -m venv .venv
           source .venv/bin/activate
-          poetry install
+          poetry install --with dev
           pyinstaller -n test-actions test_actions/__main__.py
       - name: Zip dist files
         run: zip -r dist/linux.zip dist/test-actions
