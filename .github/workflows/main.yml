@@ -8,7 +8,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4.7.1
         with:
-          python-version: 3.11.8
+          python-version: 3.11.6
           cache: poetry
       - name: Check out repository code
         uses: actions/checkout@v4
