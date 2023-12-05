@@ -6,6 +6,7 @@ jobs:
     name: Packaging on ${{ matrix.os }}
     runs-on: ${{ matrix.runner }}
     strategy:
+      fail-fast: false
       matrix:
         os: [linux, windows, macos]
         include:
@@ -49,7 +50,7 @@ jobs:
           cache: poetry
 
       - name: Install dependencies
-        run:  install --with actions
+        run: poetry install --with actions
 
       - name: Run PyInstaller
         run: poetry run pyinstaller -n test-actions test_actions/__main__.py
