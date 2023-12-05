@@ -42,6 +42,10 @@ jobs:
           python-version: 3.11
           cache: poetry
 
+      - name: Install dependencies
+        run: |
+          poetry install --with actions
+
       - name: Run PyInstaller
         run: |
           poetry run pyinstaller -n test-actions test_actions/__main__.py
