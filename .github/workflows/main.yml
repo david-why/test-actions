@@ -15,7 +15,7 @@ jobs:
           python-version: 3.11.6
           cache: poetry
       - name: Install project
-        run: poetry install
+        run: poetry install --with dev
       - name: Run PyInstaller
         run: pyinstaller -n test-actions
       - name: Zip dist files
