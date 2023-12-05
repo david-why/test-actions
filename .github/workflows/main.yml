@@ -40,7 +40,7 @@ jobs:
 
       - name: Update PATH for Windows
         if: ${{ matrix.os == 'windows' }}
-        run: echo "%APPDATA%\Python\Scripts" >> $GITHUB_PATH
+        run: echo "$APPDATA\Python\Scripts" >> $GITHUB_PATH
 
       - name: Configure poetry
         run: poetry config virtualenvs.in-project true
