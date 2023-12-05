@@ -18,6 +18,9 @@ jobs:
           - os: macos
             runner: macOS-latest
             zip_name: macos
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
