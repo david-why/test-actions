@@ -1,0 +1,31 @@
+name: Package with PyInstaller
+on: [push]
+jobs:
+  package:
+    name: Packaging on ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos]
+        include:
+          - os: macos
+            runner: macOS-latest
+            zip_name: macos
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.PAT }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Run script
+        run: bash test-macos.sh
