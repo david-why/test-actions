@@ -27,5 +27,9 @@ jobs:
         with:
           python-version: 3.11
 
+      - name: Update PATH
+        if: ${{ matrix.os != 'windows' }}
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
       - name: Run script
         run: bash test-macos.sh
