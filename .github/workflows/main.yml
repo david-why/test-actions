@@ -79,7 +79,12 @@ jobs:
         run: poetry install --with actions
 
       - name: Run PyInstaller
+        if: ${{ matrix.os != 'macos' }}
         run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/__main__.py
+
+      - name: Run PyInstaller (macos)
+        if: ${{ matrix.os == 'macos' }}
+        run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/__main__.py --target-arch universal2
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
