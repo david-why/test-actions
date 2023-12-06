@@ -1,7 +1,8 @@
 curl -sSL https://install.python-poetry.org | python - -y
-poetry init
+poetry config virtualenvs.in-project true
 poetry add pymacapp
 poetry install
+source .venv/bin/activate
 cat > test_mac.py << eof
 from pymacapp.buildtools.app import App
 from pymacapp.buildtools.package import Package
