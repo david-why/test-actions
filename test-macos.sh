@@ -1,6 +1,7 @@
 curl -sSL https://install.python-poetry.org | python - -y
 poetry init
-poetry add pymacsign
+poetry add pymacapp
+poetry install
 cat > test_mac.py << eof
 from pymacapp.buildtools.app import App
 from pymacapp.buildtools.package import Package
