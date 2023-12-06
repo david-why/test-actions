@@ -19,7 +19,7 @@ PKG_HASH = Package.get_first_hash()
 
 # create the app wrapper
 app = App("My New App")
-app.config("/path/to/main.py").build().sign(APP_HASH)
+app.config("test_actions/__main__.py").build().sign(APP_HASH)
 
 ## PACKAGE
 
