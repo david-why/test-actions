@@ -1,8 +1,8 @@
-name: Package with PyInstaller
+name: MacOS test
 on: [push]
 jobs:
   package:
-    name: Packaging on ${{ matrix.os }}
+    name: MacOS test
     runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
