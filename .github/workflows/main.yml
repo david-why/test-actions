@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 jobs:
   package:
-    name: Packaging on ${{ matrix.os }}
+    name: Packaging on ${{ matrix.name || matrix.os }}
     runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
@@ -18,17 +18,25 @@ jobs:
             runner: windows-latest
             zip_name: windows
           - os: macos
+            name: macos arm64
+            target_arch: arm64
+            shell: arch -arm64 bash --noprofile --norc -eo pipefail {0}
             runner: macOS-latest
-            zip_name: macos
+            zip_name: macos-arm64
+          - os: macos
+            name: macos x86_64
+            target_arch: x86_64
+            runner: macOS-latest
+            zip_name: macos-x86_64
     defaults:
       run:
-        shell: bash
+        shell: ${{ matrix.shell || 'bash --noprofile --norc -eo pipefail {0}' }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.FRONTEND_PAT }}
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -47,7 +55,7 @@ jobs:
 
       - name: Compile client
         run: make
-
+  
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -71,7 +79,7 @@ jobs:
       - name: Configure poetry
         run: poetry config virtualenvs.in-project true
 
-      - name: Setup cache
+      - name: Setup Python cache
         uses: actions/cache@v3
         with:
           path: .venv
@@ -84,9 +92,9 @@ jobs:
         if: ${{ matrix.os != 'macos' }}
         run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/_entrypoint.py --onefile
 
-      - name: Run PyInstaller (macos)
+      - name: Run PyInstaller for Mac OS
         if: ${{ matrix.os == 'macos' }}
-        run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/_entrypoint.py --onefile --target-arch universal2
+        run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/_entrypoint.py --onefile --target-arch ${{ matrix.target_arch }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3

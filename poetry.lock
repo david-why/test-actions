@@ -107,30 +107,6 @@ yarl = ">=1.0,<2.0"
 speedups = ["Brotli", "aiodns", "brotlicffi"]
 
 [[package]]
-name = "aiohttp"
-version = "3.9.3"
-description = "Async http client/server framework (asyncio)"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "aiohttp-3.9.3-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:6b88f9386ff1ad91ace19d2a1c0225896e28815ee09fc6a8932fded8cda97c3d"},
-]
-
-[package.dependencies]
-aiosignal = ">=1.1.2"
-attrs = ">=17.3.0"
-frozenlist = ">=1.1.1"
-multidict = ">=4.5,<7.0"
-yarl = ">=1.0,<2.0"
-
-[package.extras]
-speedups = ["Brotli", "aiodns", "brotlicffi"]
-
-[package.source]
-type = "url"
-url = "https://files.pythonhosted.org/packages/19/bc/cfb51d97646cd67cebd90f0b5b0bebe063ebc8efd93e888b0aed9d74a549/aiohttp-3.9.3-cp311-cp311-macosx_10_9_universal2.whl"
-
-[[package]]
 name = "aiosignal"
 version = "1.3.1"
 description = "aiosignal: a list of registered asynchronous callbacks"
@@ -350,20 +326,6 @@ files = [
 ]
 
 [[package]]
-name = "frozenlist"
-version = "1.4.1"
-description = "A list-like structure which implements collections.abc.MutableSequence"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "frozenlist-1.4.1-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:a0cb6f11204443f27a1628b0e460f37fb30f624be6051d490fa7d7e26d4af3d0"},
-]
-
-[package.source]
-type = "url"
-url = "https://files.pythonhosted.org/packages/01/bc/8d33f2d84b9368da83e69e42720cff01c5e199b5a868ba4486189a4d8fa9/frozenlist-1.4.1-cp311-cp311-macosx_10_9_universal2.whl"
-
-[[package]]
 name = "h11"
 version = "0.14.0"
 description = "A pure-Python, bring-your-own-I/O implementation of HTTP/1.1"
@@ -447,23 +409,6 @@ files = [
 
 [package.extras]
 test = ["Cython (>=0.29.24,<0.30.0)"]
-
-[[package]]
-name = "httptools"
-version = "0.6.1"
-description = "A collection of framework independent HTTP protocol utils."
-optional = false
-python-versions = ">=3.8.0"
-files = [
-    {file = "httptools-0.6.1-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:7a7ea483c1a4485c71cb5f38be9db078f8b0e8b4c4dc0210f531cdd2ddac1ef1"},
-]
-
-[package.extras]
-test = ["Cython (>=0.29.24,<0.30.0)"]
-
-[package.source]
-type = "url"
-url = "https://files.pythonhosted.org/packages/f5/d1/53283b96ed823d5e4d89ee9aa0f29df5a1bdf67f148e061549a595d534e4/httptools-0.6.1-cp311-cp311-macosx_10_9_universal2.whl"
 
 [[package]]
 name = "hypercorn"
@@ -551,20 +496,6 @@ files = [
 
 [package.dependencies]
 altgraph = ">=0.17"
-
-[[package]]
-name = "MarkupSafe"
-version = "2.1.3"
-description = "Safely add untrusted strings to HTML/XML markup."
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "MarkupSafe-2.1.3-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:ad9e82fb8f09ade1c3e1b996a6337afac2b8b9e365f926f5a61aacc71adc5b3c"},
-]
-
-[package.source]
-type = "url"
-url = "https://files.pythonhosted.org/packages/fe/09/c31503cb8150cf688c1534a7135cc39bb9092f8e0e6369ec73494d16ee0e/MarkupSafe-2.1.3-cp311-cp311-macosx_10_9_universal2.whl"
 
 [[package]]
 name = "markupsafe"
@@ -733,20 +664,6 @@ files = [
     {file = "multidict-6.0.5-py3-none-any.whl", hash = "sha256:0d63c74e3d7ab26de115c49bffc92cc77ed23395303d496eae515d4204a625e7"},
     {file = "multidict-6.0.5.tar.gz", hash = "sha256:f7e301075edaf50500f0b341543c41194d8df3ae5caf4702f2095f3ca73dd8da"},
 ]
-
-[[package]]
-name = "multidict"
-version = "6.0.5"
-description = "multidict implementation"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "multidict-6.0.5-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:f285e862d2f153a70586579c15c44656f888806ed0e5b56b64489afe4a2dbfba"},
-]
-
-[package.source]
-type = "url"
-url = "https://files.pythonhosted.org/packages/5f/da/b10ea65b850b54f44a6479177c6987f456bc2d38f8dc73009b78afcf0ede/multidict-6.0.5-cp311-cp311-macosx_10_9_universal2.whl"
 
 [[package]]
 name = "packaging"
@@ -1080,24 +997,6 @@ docs = ["Sphinx (>=4.1.2,<4.2.0)", "sphinx-rtd-theme (>=0.5.2,<0.6.0)", "sphinxc
 test = ["Cython (>=0.29.36,<0.30.0)", "aiohttp (==3.9.0b0)", "aiohttp (>=3.8.1)", "flake8 (>=5.0,<6.0)", "mypy (>=0.800)", "psutil", "pyOpenSSL (>=23.0.0,<23.1.0)", "pycodestyle (>=2.9.0,<2.10.0)"]
 
 [[package]]
-name = "uvloop"
-version = "0.19.0"
-description = "Fast implementation of asyncio event loop on top of libuv"
-optional = false
-python-versions = ">=3.8.0"
-files = [
-    {file = "uvloop-0.19.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:4ce6b0af8f2729a02a5d1575feacb2a94fc7b2e983868b009d51c9a9d2149bef"},
-]
-
-[package.extras]
-docs = ["Sphinx (>=4.1.2,<4.2.0)", "sphinx-rtd-theme (>=0.5.2,<0.6.0)", "sphinxcontrib-asyncio (>=0.3.0,<0.4.0)"]
-test = ["Cython (>=0.29.36,<0.30.0)", "aiohttp (==3.9.0b0)", "aiohttp (>=3.8.1)", "flake8 (>=5.0,<6.0)", "mypy (>=0.800)", "psutil", "pyOpenSSL (>=23.0.0,<23.1.0)", "pycodestyle (>=2.9.0,<2.10.0)"]
-
-[package.source]
-type = "url"
-url = "https://files.pythonhosted.org/packages/41/2a/608ad69f27f51280098abee440c33e921d3ad203e2c86f7262e241e49c99/uvloop-0.19.0-cp311-cp311-macosx_10_9_universal2.whl"
-
-[[package]]
 name = "watchfiles"
 version = "0.21.0"
 description = "Simple, modern and high performance file watching and code reload in python."
@@ -1185,23 +1084,6 @@ files = [
 anyio = ">=3.0.0"
 
 [[package]]
-name = "watchfiles"
-version = "0.21.0"
-description = "Simple, modern and high performance file watching and code reload in python."
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "watchfiles-0.21.0-cp311-cp311-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl", hash = "sha256:daa6e292e3c9f7bc29bb5e2cbffacba9a056e76edfa625a0681b893234363dfa"},
-]
-
-[package.dependencies]
-anyio = ">=3.0.0"
-
-[package.source]
-type = "file"
-url = "watchfiles-0.21.0-cp311-cp311-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl"
-
-[[package]]
 name = "websockets"
 version = "12.0"
 description = "An implementation of the WebSocket Protocol (RFC 6455 & 7692)"
@@ -1281,20 +1163,6 @@ files = [
     {file = "websockets-12.0-py3-none-any.whl", hash = "sha256:dc284bbc8d7c78a6c69e0c7325ab46ee5e40bb4d50e494d8131a07ef47500e9e"},
     {file = "websockets-12.0.tar.gz", hash = "sha256:81df9cbcbb6c260de1e007e58c011bfebe2dafc8435107b0537f393dd38c8b1b"},
 ]
-
-[[package]]
-name = "websockets"
-version = "12.0"
-description = "An implementation of the WebSocket Protocol (RFC 6455 & 7692)"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "websockets-12.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:5d873c7de42dea355d73f170be0f23788cf3fa9f7bed718fd2830eefedce01b4"},
-]
-
-[package.source]
-type = "url"
-url = "https://files.pythonhosted.org/packages/02/73/9c1e168a2e7fdf26841dc98f5f5502e91dea47428da7690a08101f616169/websockets-12.0-cp311-cp311-macosx_10_9_universal2.whl"
 
 [[package]]
 name = "werkzeug"
@@ -1430,25 +1298,7 @@ files = [
 idna = ">=2.0"
 multidict = ">=4.0"
 
-[[package]]
-name = "yarl"
-version = "1.9.4"
-description = "Yet another URL library"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "yarl-1.9.4-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:35a2b9396879ce32754bd457d31a51ff0a9d426fd9e0e3c33394bf4b9036b099"},
-]
-
-[package.dependencies]
-idna = ">=2.0"
-multidict = ">=4.0"
-
-[package.source]
-type = "url"
-url = "https://files.pythonhosted.org/packages/12/65/4c7f3676209a569405c9f0f492df2bc3a387c253f5d906e36944fdd12277/yarl-1.9.4-cp311-cp311-macosx_10_9_universal2.whl"
-
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11, <3.12"
-content-hash = "4eaee5127a8c4aa81cbe42b180a0ca2d838a83a83d9666f4c29e9734619fbf38"
+content-hash = "a99f965f64a0ecf08a29e5351a641afdd4bdc794f8fcd4b78f8fba606eba315e"
