@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
 jobs:
   package:
-    name: Packaging on ${{ matrix.name || matrix.os }}
+    name: Packaging on ${{ matrix.os }}
     runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
-        os: [linux, windows, macos]
+        os: [linux, windows, macos-arm64, macos-x86_64]
         include:
           - os: linux
             runner: ubuntu-latest
@@ -17,14 +17,12 @@ jobs:
           - os: windows
             runner: windows-latest
             zip_name: windows
-          - os: macos
-            name: macos arm64
+          - os: macos-arm64
             target_arch: arm64
             shell: arch -arm64 bash --noprofile --norc -eo pipefail {0}
             runner: macOS-latest
             zip_name: macos-arm64
-          - os: macos
-            name: macos x86_64
+          - os: macos-x86_64
             target_arch: x86_64
             runner: macOS-latest
             zip_name: macos-x86_64
@@ -89,11 +87,11 @@ jobs:
         run: poetry install --with actions
 
       - name: Run PyInstaller
-        if: ${{ matrix.os != 'macos' }}
+        if: ${{ matrix.runner != 'macOS-latest' }}
         run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/_entrypoint.py --onefile
 
       - name: Run PyInstaller for Mac OS
-        if: ${{ matrix.os == 'macos' }}
+        if: ${{ matrix.runner == 'macOS-latest' }}
         run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/_entrypoint.py --onefile --target-arch ${{ matrix.target_arch }}
 
       - name: Upload artifact
