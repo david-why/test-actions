@@ -19,11 +19,21 @@ markupsafe = [
 ]
 quart-cors = "^0.7.0"
 
+# macos universal2 hack
+watchfiles = [
+    {markers = "sys_platform == 'darwin'", path = "./watchfiles-0.21.0-cp311-cp311-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl"},
+    {markers = "sys_platform != 'darwin'", version = "^0.21.0", source = "pypi"}
+]
+
 [tool.poetry.group.actions]
 optional = true
 
 [tool.poetry.group.actions.dependencies]
 pyinstaller = "^6.2.0"
+
+
+[tool.poetry.group.dev.dependencies]
+tomlkit = "^0.12.4"
 
 [build-system]
 requires = ["poetry-core"]
