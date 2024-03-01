@@ -19,7 +19,7 @@ jobs:
             zip_name: windows
           - os: macos-arm64
             target_arch: arm64
-            shell: arch -arm64 bash
+            shell: arch -arm64 bash {0}
             runner: macOS-latest
             zip_name: macos-arm64
           - os: macos-x86_64
@@ -28,7 +28,7 @@ jobs:
             zip_name: macos-x86_64
     defaults:
       run:
-        shell: ${{ matrix.shell || 'bash' }}
+        shell: ${{ matrix.shell || 'bash {0}' }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
