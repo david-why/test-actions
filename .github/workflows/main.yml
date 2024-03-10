@@ -88,11 +88,11 @@ jobs:
 
       - name: Run PyInstaller
         if: ${{ matrix.runner != 'macOS-latest' }}
-        run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/_entrypoint.py --onefile
+        run: poetry run pyinstaller -n ${{ matrix.os }}-test-actions --collect-all test_actions test_actions/_entrypoint.py --onefile
 
       - name: Run PyInstaller for Mac OS
         if: ${{ matrix.runner == 'macOS-latest' }}
-        run: poetry run pyinstaller -n test-actions --collect-all test_actions test_actions/_entrypoint.py --onefile --target-arch ${{ matrix.target_arch }}
+        run: poetry run pyinstaller -n ${{ matrix.os }}-test-actions --collect-all test_actions test_actions/_entrypoint.py --onefile --target-arch ${{ matrix.target_arch }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
