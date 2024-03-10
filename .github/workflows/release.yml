@@ -33,6 +33,7 @@ jobs:
       with:
         run-id: ${{ steps.get-run-id.outputs.run-id }}
         github-token: ${{ secrets.ACTIONS_PAT }}
+        merge-multiple: true
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "*.zip"
