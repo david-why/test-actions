@@ -33,10 +33,9 @@ jobs:
       with:
         run-id: ${{ steps.get-run-id.outputs.run-id }}
         github-token: ${{ secrets.ACTIONS_PAT }}
-        merge-multiple: true
     - uses: ncipollo/release-action@v1
       with:
-        artifacts: "*.zip"
+        artifacts: "windows/*,linux/*,macos-x86_64/*"
         removeArtifacts: true
         tag: nightly
         commit: ${{ steps.get-run-id.outputs.commit }}
