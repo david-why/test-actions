@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [linux, windows, macos-x86_64]
+        os: [linux, windows, macos]
         include:
           - os: linux
             runner: ubuntu-latest
@@ -22,13 +22,13 @@ jobs:
           #  shell: arch -arm64 bash {0}
           #  runner: macOS-latest
           #  zip_name: macos-arm64
-          - os: macos-x86_64
-            target_arch: x86_64
+          - os: macos
+            target_arch: universal2
             runner: macOS-latest
-            zip_name: macos-x86_64
+            zip_name: macos
     defaults:
       run:
-        shell: ${{ matrix.shell || 'bash {0}' }}
+        shell: ${{ matrix.shell || 'bash' }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -64,7 +64,11 @@ jobs:
         run: echo version=$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))") >> $GITHUB_OUTPUT
 
       - name: Install poetry
-        run: curl -sSL https://install.python-poetry.org | python - -y
+        run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.8.2 python - -y
+
+      - name: A little hackery for MacOS
+        if: ${{ matrix.os == 'macos' }}
+        run: sed -ie 's/append("universal2")/insert(0, "universal2")/' ~/Library/Application\ Support/pypoetry/venv/lib/python3.*/site-packages/poetry/core/_vendor/packaging/tags.py
 
       - name: Update PATH
         if: ${{ matrix.os != 'windows' }}
